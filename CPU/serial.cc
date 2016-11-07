@@ -58,7 +58,6 @@ int main()
     }
     for (unsigned i = 0; i < world1D.size(); i++)
     {
-        //printf("world1D[i]: %d \t", world1D[i]);
         int row = i / uImg8UC.cols;
         int col = i % uImg8UC.cols;
         world[row][col] = world1D[i];
@@ -72,52 +71,26 @@ int main()
     // Game
     for(int iter = 0; iter<1000; iter++)
     {
+        std::vector<std::vector<uchar>> world_save;
+        world_save.resize(uImg8UC.rows);
+        for (int a_row = 0; a_row < uImg8UC.rows; ++a_row)
+            world_save[a_row].resize(uImg8UC.cols);
+
         for (int row = 0; row < uImg8UC.rows; row++)
         {
             for(int col = 0; col < uImg8UC.cols; col++)
             {
-                //printf("CHECKPOINT 5: col(%d)\n", col);
                 int alive_neighbors = live_cells(row,col,uImg8UC.rows,uImg8UC.cols, world);
                 alive_neighbors /= 255;
                 
                 if (alive_neighbors == 3 || (alive_neighbors == 2 && world[row][col]))
-                {
-                    world[row][col] = 255;
-                }
+                    world_save[row][col] = 255;
                 else 
-                {
-                    world[row][col] = 0;
-                }
-                //
-                //if ((std::rand() % 100) < 5)
-                //{
-                //    
-                //    world[row][col] = 0;
-                //}
-                
-                //if (world[row][col] == 255)
-                //{
-                //    if(alive_neighbors == 3)
-                //    {
-                //        world[row][col] = 255;
-                //    }
-                //    else
-                //    {
-                //        world[row][col] = 0;
-                //    }
-                //}
-                //else
-                //{
-                //    if(alive_neighbors == 2)
-                //    {
-                //        world[row][col] = 255;
-                //    }
-                //}
-            
-
+                    world_save[row][col] = 0;
             }
         }
         
+        world = world_save;
         // DEBUG ##################################################
         //printf("\t after game: \n");
         //printf("world: %d :  %d \n", world.size(), world[0].size());
@@ -125,7 +98,7 @@ int main()
         
         for(int row = 0; row <  uImg8UC.rows; row++)
             for(int col = 0; col <  uImg8UC.cols; col++)
-                world1D[(row*uImg8UC.cols) + col] = world[row][col];
+                world1D[(row*uImg8UC.cols) + col] = world_save[row][col];
             
         // DEBUG ##################################################
         //printf("\t  2d to 1d: \n");
