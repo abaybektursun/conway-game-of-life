@@ -20,11 +20,11 @@ int main()
 {    
     //----------------------------------------------------------------------------------------------
     // Read user's image
-    cv::Mat userImg = cv::imread("./img.png",0);
+    cv::Mat userImg = cv::imread("imgs/0.png",0);
     cv::Mat uImg8UC = cv::Mat(cv::Size(userImg.rows, userImg.cols),CV_8UC1);
     // Convert the user image to black and white using threshold
     cv::threshold( userImg, uImg8UC, 128, 255, CV_THRESH_BINARY );
-    cv::imwrite( "./world_start.png",uImg8UC ); 
+    cv::imwrite( "imgs/1.png",uImg8UC ); 
     //----------------------------------------------------------------------------------------------
     // DEBUG ##################################################
     //printf("userImg: %d :  %d \n", userImg.rows, userImg.cols);
@@ -69,7 +69,7 @@ int main()
     
     std::srand(time(NULL));
     // Game
-    for(int iter = 0; iter<1000; iter++)
+    for(int iter = 2; iter<10000; iter++)
     {
         std::vector<std::vector<uchar>> world_save;
         world_save.resize(uImg8UC.rows);
@@ -119,7 +119,7 @@ int main()
         //printf("a_frame: %d :  %d \n", a_frame.rows, a_frame.cols);
         // DEBUG ##################################################
         
-        std::string fileN = std::to_string(iter) + ".png";
+        std::string fileN = "imgs/" + std::to_string(iter) + ".png";
     
         
         try {
