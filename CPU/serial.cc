@@ -69,7 +69,7 @@ int main()
     
     std::srand(time(NULL));
     // Game
-    for(int iter = 2; iter<10000; iter++)
+    for(int iter = 2; iter<1000; iter++)
     {
         std::vector<std::vector<uchar>> world_save;
         world_save.resize(uImg8UC.rows);
