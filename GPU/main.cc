@@ -7,7 +7,11 @@
 #include <string>
 #include "routines.cc"
 
+<<<<<<< HEAD
 #define ITERS 1000
+=======
+#define ITERS 100
+>>>>>>> 4d0f5286c686fe5775d7b33f8b65cd39b8edb158
 
 // parallel.cu  ----------------------------------------------------//
 void game_of_life_cuda(unsigned char* const d_inWorld,
