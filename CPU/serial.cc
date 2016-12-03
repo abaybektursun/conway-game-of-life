@@ -8,6 +8,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#define ITERS 100
+
 std::vector<uchar> world;
 
 // Write about infinite world and circular index
@@ -69,7 +71,7 @@ int main()
     
     std::srand(time(NULL));
     // Game
-    for(int iter = 2; iter<1000; iter++)
+    for(int iter = 2; iter<ITERS; iter++)
     {
         std::vector<std::vector<uchar>> world_save;
         world_save.resize(uImg8UC.rows);

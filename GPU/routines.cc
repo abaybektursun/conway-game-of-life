@@ -35,7 +35,6 @@ unsigned char *MatToUnsignChar(cv::Mat inMat){
 
 void preProcess(unsigned char **h_inWorld, unsigned char **h_outWorld,
                 unsigned char **d_inWorld, unsigned char **d_outWorld,
-                unsigned char **d_outWorld_swap,
                 const std::string &filename)
 {
     //Check the context initializes correctly
@@ -50,8 +49,8 @@ void preProcess(unsigned char **h_inWorld, unsigned char **h_outWorld,
     }
     //uImg8UC1 = cv::Mat(cv::Size(userImg.cols, userImg.rows),CV_8UC1);
     // Convert the user image to black and white using threshold
-    //cv::threshold(userImg, uImg8UC1, 128, 255, CV_THRESH_BINARY );
-    uImg8UC1 = userImg > 128;
+    cv::threshold(userImg, uImg8UC1, 128, 255, CV_THRESH_BINARY );
+    //uImg8UC1 = userImg > 128;
     cv::imwrite( "imgs/1.png",uImg8UC1 );
     //----------------------------------------------------------------------------------------------
 
@@ -66,20 +65,17 @@ void preProcess(unsigned char **h_inWorld, unsigned char **h_outWorld,
      *h_inWorld  = MatToUnsignChar(uImg8UC1);
 
      *h_outWorld      =  (unsigned char *)malloc(sizeof(unsigned char) *  numRows() * numCols());
-     *d_outWorld_swap =  (unsigned char *)malloc(sizeof(unsigned char) *  numRows() * numCols());
 }
 
 void memoryManagement(unsigned char **h_inWorld,  unsigned char **d_inWorld,
-                      unsigned char **d_outWorld, unsigned char **d_outWorld_swap)
+                                                  unsigned char **d_outWorld)
 {
     const size_t numPixels = numRows() * numCols();
 
     //allocate memory on the device for both input and output
     checkCudaErrors(cudaMalloc(d_inWorld,       sizeof(unsigned char) * numPixels));
     checkCudaErrors(cudaMalloc(d_outWorld,      sizeof(unsigned char) * numPixels));
-    checkCudaErrors(cudaMalloc(d_outWorld_swap, sizeof(unsigned char) * numPixels));
     checkCudaErrors(cudaMemset(*d_outWorld,      0, numPixels * sizeof(unsigned char)));
-    checkCudaErrors(cudaMemset(*d_outWorld_swap, 0, numPixels * sizeof(unsigned char)));
     //copy input array to the GPU
     checkCudaErrors(cudaMemcpy(*d_inWorld, *h_inWorld, sizeof(unsigned char) * numPixels, cudaMemcpyHostToDevice));
     d_inWorld__  = *d_inWorld;

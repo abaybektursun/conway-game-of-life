@@ -20,7 +20,7 @@ run:
 	./serial
 
 video:
-	ffmpeg -r 24 -f image2 -r 1/0.9 -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y movie.mp4
+	ffmpeg -r 24 -f image2 -r 1/0.07 -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y movie.mp4
 
 #clean:
 #	rm -f *.o *.png hw

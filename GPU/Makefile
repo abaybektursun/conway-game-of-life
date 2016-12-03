@@ -19,7 +19,7 @@ NVCC_OPTS=-O3 -arch=sm_20 -Xcompiler -Wall -Xcompiler -Wextra -m64
 GCC_OPTS=-O3 -Wall -Wextra -m64 -std=c++1y
 #----------------------------------------------------------------------------------------------------
 APPLICATION_NAME=game_of_life_cuda
-SPEED_VIDEO=1/0.08
+SPEED_VIDEO="1/0.07"
 
 all: imgs_folder get_image master create_run
 
@@ -41,7 +41,7 @@ device.o: device.cu utils.h
 	nvcc -c device.cu $(NVCC_OPTS)
 
 create_run:
-	@echo "./game_of_life_cuda && \
+	echo "./game_of_life_cuda && \
 	ffmpeg -r 24 -f image2 -r $(SPEED_VIDEO) -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y $(APPLICATION_NAME).mp4 && \
 	echo \"Success! Video '$(APPLICATION_NAME).mp4' was generated\"" > run.sh \
 	&& chmod +x run.sh
