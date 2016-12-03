@@ -42,11 +42,7 @@ device.o: device.cu utils.h
 
 create_run:
 	@echo "./game_of_life_cuda && \
-<<<<<<< HEAD
 	ffmpeg -r 24 -f image2 -r $(SPEED_VIDEO) -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y $(APPLICATION_NAME).mp4 && \
-=======
-	ffmpeg -r 24 -f image2 -r 1/0.4 -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y $(APPLICATION_NAME).mp4 && \
->>>>>>> 4d0f5286c686fe5775d7b33f8b65cd39b8edb158
 	echo \"Success! Video '$(APPLICATION_NAME).mp4' was generated\"" > run.sh \
 	&& chmod +x run.sh
 
