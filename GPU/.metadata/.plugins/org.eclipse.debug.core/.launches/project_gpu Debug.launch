@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.cdt.launch.applicationLaunchType">
+<booleanAttribute key="breakOnError" value="false"/>
+<booleanAttribute key="lc.enable.memcheck" value="false"/>
+<booleanAttribute key="lc.extrapolate" value="true"/>
+<booleanAttribute key="lc.kernelevents" value="true"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.AUTO_SOLIB" value="true"/>
+<listAttribute key="org.eclipse.cdt.dsf.gdb.AUTO_SOLIB_LIST"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_NAME" value="${cuda_tk_bin:/project_gpu}/cuda-gdb"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.GDB_INIT" value=".cuda-gdbinit"/>
+<listAttribute key="org.eclipse.cdt.dsf.gdb.SOLIB_PATH"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
+<intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
+<stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="gdb"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
+<booleanAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN_SYMBOL" value="main"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="/root/projects/GitHub/conway-game-of-life/GPU/project_gpu/Debug/sources.mk"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="project_gpu"/>
+<booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.nvidia.cuda.ide.seven_five.configuration.debug.1359368808"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/project_gpu"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<mapAttribute key="org.eclipse.debug.core.environmentVariables">
+<mapEntry key="CUDA_HOME" value="/usr/local/cuda-7.5"/>
+<mapEntry key="CUDNN_PATH" value="/usr/local/cuda-7.5/lib64"/>
+<mapEntry key="PATH" value="/usr/local/cuda-7.5/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/java/default/bin:/usr/local/share/scala/scala-2.11.8/bin:/root/bin:/usr/hadoop/sbin:/usr/hadoop/bin:/usr/local/cuda-7.5/bin"/>
+</mapAttribute>
+<mapAttribute key="org.eclipse.debug.core.preferred_launchers">
+<mapEntry key="[debug]" value="com.nvidia.cuda.ide.debug.launchApplicationDelegate"/>
+</mapAttribute>
+<stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
+</launchConfiguration>

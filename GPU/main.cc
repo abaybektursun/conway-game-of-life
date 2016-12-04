@@ -25,7 +25,6 @@ int main()
 
     //load the image and get the pointers
     preProcess(&h_inWorld, &h_outWorld,
-               &d_inWorld, &d_outWorld,
                           in_file_name);
 
     memoryManagement(&h_inWorld, &d_inWorld, &d_outWorld);
@@ -35,22 +34,23 @@ int main()
     // CUDA
     game_of_life_cuda(d_inWorld, d_outWorld, numRows(), numCols());
     // Get yo ass back to host
-    checkCudaErrors(cudaMemcpy(h_outWorld, d_outWorld__, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_outWorld, d_outWorld, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
     unsigned i;
     for(i = 2; i < ITERS; i++){
+
         std::thread writer([&](){
-            save8UC1Image(&h_outWorld, std::to_string(i) + ".png");
+            save8UImage(&h_outWorld, std::to_string(i) + ".png");
         });
         std::swap(d_inWorld, d_outWorld); 
 
         game_of_life_cuda(d_inWorld, d_outWorld, numRows(), numCols());
         // Get yo ass back to host
-        checkCudaErrors(cudaMemcpy(h_outWorld, d_outWorld__, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_outWorld, d_outWorld, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
 
         writer.join();
     }
     cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
-    save8UC1Image(&h_outWorld, std::to_string(i) + ".png");
+    save8UImage(&h_outWorld, std::to_string(i) + ".png");
 
 
     /*
@@ -61,8 +61,10 @@ int main()
     checkCudaErrors(cudaFree(d_outWorld));
     */
 
-    free(d_inWorld);
+    free(h_inWorld);
+    printf("free h_inWorld Done!\n");
     free(h_outWorld);
+    printf("free h_outWorld Done!\n");
     cleanUp();
     return 0;
 }

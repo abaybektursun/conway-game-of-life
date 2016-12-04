@@ -47,4 +47,4 @@ create_run:
 	&& chmod +x run.sh
 
 clean:
-	rm -f run.sh *.o *.log $(IMGS_FOLDER)/*.png $(APPLICATION_NAME)
+	rm -f run.sh *.o *.log $(IMGS_FOLDER)/*.png $(APPLICATION_NAME) $(APPLICATION_NAME).mp4

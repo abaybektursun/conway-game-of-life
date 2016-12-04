@@ -9,20 +9,20 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-cv::Mat uImg8UC1;
-cv::Mat a_frame;
+cv::Mat uImg_8U;
 
 unsigned char *d_inWorld__;
 unsigned char *d_outWorld__;
 
-size_t numRows() { return uImg8UC1.rows; }
-size_t numCols() { return uImg8UC1.cols; }
+size_t numRows() { return uImg_8U.rows; }
+size_t numCols() { return uImg_8U.cols; }
 
 
 unsigned char *MatToUnsignChar(cv::Mat inMat){
     int height = numRows();
     int width  = numCols();
-    unsigned char buffer[height * width];
+    //unsigned char buffer[height * width];
+    unsigned char *buffer = (unsigned char *)malloc(sizeof(unsigned char) *  numRows() * numCols());
     uchar* p;
     for (int i = 0; i < height; ++i) {
         p = inMat.ptr<uchar>(i);
@@ -34,7 +34,6 @@ unsigned char *MatToUnsignChar(cv::Mat inMat){
 }
 
 void preProcess(unsigned char **h_inWorld, unsigned char **h_outWorld,
-                unsigned char **d_inWorld, unsigned char **d_outWorld,
                 const std::string &filename)
 {
     //Check the context initializes correctly
@@ -47,24 +46,21 @@ void preProcess(unsigned char **h_inWorld, unsigned char **h_outWorld,
         std::cerr << "Couldn't open file: " << filename << std::endl;
         exit(1);
     }
-    //uImg8UC1 = cv::Mat(cv::Size(userImg.cols, userImg.rows),CV_8UC1);
+    //uImg_8U = cv::Mat(cv::Size(userImg.cols, userImg.rows),CV_8UC1);
     // Convert the user image to black and white using threshold
-    cv::threshold(userImg, uImg8UC1, 128, 255, CV_THRESH_BINARY );
-    //uImg8UC1 = userImg > 128;
-    cv::imwrite( "imgs/1.png",uImg8UC1 );
+    //cv::threshold(userImg, uImg_8U, 128, 255, CV_THRESH_BINARY );
+    uImg_8U = userImg > 128;
+    cv::imwrite( "imgs/1.png",uImg_8U );
     //----------------------------------------------------------------------------------------------
 
-    // A single interations will be stored here
-    a_frame = cv::Mat(cv::Size(uImg8UC1.cols, uImg8UC1.rows),CV_8U);
-
-    if (!uImg8UC1.isContinuous() || !a_frame.isContinuous()) {
-        std::cerr << "uImg8UC1 is no continuous, closing the program" << std::endl;
+    if (!uImg_8U.isContinuous()) {
+        std::cerr << "uImg_8U is no continuous, closing the program" << std::endl;
         exit(1);
     }
 
-     *h_inWorld  = MatToUnsignChar(uImg8UC1);
+     *h_inWorld  = MatToUnsignChar(uImg_8U);
 
-     *h_outWorld      =  (unsigned char *)malloc(sizeof(unsigned char) *  numRows() * numCols());
+     *h_outWorld =  (unsigned char *)malloc(sizeof(unsigned char) *  numRows() * numCols());
 }
 
 void memoryManagement(unsigned char **h_inWorld,  unsigned char **d_inWorld,
@@ -73,9 +69,9 @@ void memoryManagement(unsigned char **h_inWorld,  unsigned char **d_inWorld,
     const size_t numPixels = numRows() * numCols();
 
     //allocate memory on the device for both input and output
-    checkCudaErrors(cudaMalloc(d_inWorld,       sizeof(unsigned char) * numPixels));
-    checkCudaErrors(cudaMalloc(d_outWorld,      sizeof(unsigned char) * numPixels));
-    checkCudaErrors(cudaMemset(*d_outWorld,      0, numPixels * sizeof(unsigned char)));
+    checkCudaErrors(cudaMalloc(d_inWorld,      sizeof(unsigned char) * numPixels));
+    checkCudaErrors(cudaMalloc(d_outWorld,     sizeof(unsigned char) * numPixels));
+    checkCudaErrors(cudaMemset(*d_outWorld, 0, sizeof(unsigned char) * numPixels));
     //copy input array to the GPU
     checkCudaErrors(cudaMemcpy(*d_inWorld, *h_inWorld, sizeof(unsigned char) * numPixels, cudaMemcpyHostToDevice));
     d_inWorld__  = *d_inWorld;
@@ -83,7 +79,7 @@ void memoryManagement(unsigned char **h_inWorld,  unsigned char **d_inWorld,
 
 }
 
-void save8UC1Image(unsigned char **ucharArr, std::string filename)
+void save8UImage(unsigned char **ucharArr, std::string filename)
 {
     //cv::Mat output(numRows(), numCols(), CV_8UC1, (void*)*ucharArr);
 
@@ -92,7 +88,7 @@ void save8UC1Image(unsigned char **ucharArr, std::string filename)
     //output the image
     //cv::imwrite("imgs/" + filename, imageOutput);
     //---------------------------------------------------------------------
-    cv::Mat outMat = cv::Mat(cv::Size(uImg8UC1.cols, uImg8UC1.rows),CV_8U, *ucharArr);
+    cv::Mat outMat = cv::Mat(cv::Size(uImg_8U.cols, uImg_8U.rows),CV_8U, *ucharArr);
     cv::imwrite( "imgs/" + filename, outMat );
 }
 

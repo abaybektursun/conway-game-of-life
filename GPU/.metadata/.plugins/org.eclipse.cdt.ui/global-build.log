@@ -1,0 +1,30 @@
+09:43:02 **** Incremental Build of configuration Debug for project CUDA ****
+make all 
+Building target: CUDA
+Invoking: NVCC Linker
+/usr/local/cuda-7.5/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52 -link -o  "CUDA"  ./src/main.o ./src/routines.o   
+./src/routines.o: In function `cv::Mat::~Mat()':
+/usr/include/opencv2/core/mat.hpp:278: undefined reference to `cv::fastFree(void*)'
+./src/routines.o: In function `cv::Mat::operator=(cv::Mat const&)':
+/usr/include/opencv2/core/mat.hpp:298: undefined reference to `cv::Mat::copySize(cv::Mat const&)'
+./src/routines.o: In function `cv::Mat::create(int, int, int)':
+/usr/include/opencv2/core/mat.hpp:353: undefined reference to `cv::Mat::create(int, int const*, int)'
+./src/routines.o: In function `cv::Mat::release()':
+/usr/include/opencv2/core/mat.hpp:367: undefined reference to `cv::Mat::deallocate()'
+collect2: error: ld returned 1 exit status
+make: *** [CUDA] Error 1
+09:43:06 **** Incremental Build of configuration Debug for project CUDA ****
+make all 
+Building target: CUDA
+Invoking: NVCC Linker
+/usr/local/cuda-7.5/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_52,code=compute_52 -gencode arch=compute_52,code=sm_52 -link -o  "CUDA"  ./src/main.o ./src/routines.o   
+./src/routines.o: In function `cv::Mat::~Mat()':
+/usr/include/opencv2/core/mat.hpp:278: undefined reference to `cv::fastFree(void*)'
+./src/routines.o: In function `cv::Mat::operator=(cv::Mat const&)':
+/usr/include/opencv2/core/mat.hpp:298: undefined reference to `cv::Mat::copySize(cv::Mat const&)'
+./src/routines.o: In function `cv::Mat::create(int, int, int)':
+/usr/include/opencv2/core/mat.hpp:353: undefined reference to `cv::Mat::create(int, int const*, int)'
+./src/routines.o: In function `cv::Mat::release()':
+/usr/include/opencv2/core/mat.hpp:367: undefined reference to `cv::Mat::deallocate()'
+collect2: error: ld returned 1 exit status
+make: *** [CUDA] Error 1
