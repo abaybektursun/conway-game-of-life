@@ -37,6 +37,7 @@ int main()
     checkCudaErrors(cudaMemcpy(h_outWorld, d_outWorld, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
     unsigned i;
     for(i = 2; i < ITERS; i++){
+    	//printf("Iter: %d\n",i);
 
         std::thread writer([&](){
             save8UImage(&h_outWorld, std::to_string(i) + ".png");
@@ -62,9 +63,7 @@ int main()
     */
 
     free(h_inWorld);
-    printf("free h_inWorld Done!\n");
     free(h_outWorld);
-    printf("free h_outWorld Done!\n");
     cleanUp();
     return 0;
 }

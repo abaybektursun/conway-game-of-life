@@ -20,8 +20,8 @@ void cell_live(const unsigned char* const in_world,
 
     const unsigned int thread_1D_pos  = thread_2D_pos.y * numCols + thread_2D_pos.x;
     //debug---------------------------------
-      //if(in_world[thread_1D_pos] != 0 && in_world[thread_1D_pos] != 255)
-        //printf("non binary: %d\n",in_world[thread_1D_pos]);
+      if(in_world[thread_1D_pos] != 0 && in_world[thread_1D_pos] != 255)
+        printf("non binary: %d\n",in_world[thread_1D_pos]);
     //debug---------------------------------
 
 

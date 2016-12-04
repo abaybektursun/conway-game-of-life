@@ -1,0 +1,50 @@
+ffmpeg: /usr/local/cuda-7.5/lib64/libOpenCL.so.1: no version information available (required by ffmpeg)
+ffmpeg: /usr/local/cuda-7.5/lib64/libOpenCL.so.1: no version information available (required by /lib64/libavfilter.so.5)
+ffmpeg: /usr/local/cuda-7.5/lib64/libOpenCL.so.1: no version information available (required by /lib64/libavutil.so.54)
+ffmpeg version 2.8.8 Copyright (c) 2000-2016 the FFmpeg developers
+  built with gcc 4.8.5 (GCC) 20150623 (Red Hat 4.8.5-4)
+  configuration: --arch=x86_64 --bindir=/usr/bin --datadir=/usr/share/ffmpeg --disable-debug --disable-static --disable-stripping --enable-avfilter --enable-avresample --enable-bzlib --enable-doc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gpl --enable-iconv --enable-libaacplus --enable-libass --enable-libbluray --enable-libcdio --enable-libdc1394 --enable-libfaac --enable-libfdk-aac --enable-libfreetype --enable-libfribidi --enable-libgsm --disable-libkvazaar --enable-libmfx --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libv4l2 --enable-libvo-aacenc --enable-libvo-amrwbenc --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-lzma --enable-nonfree --enable-openal --enable-opencl --enable-nvenc --extra-cflags=-I/usr/include/nvenc --enable-opengl --enable-postproc --enable-pthreads --enable-sdl --enable-shared --enable-version3 --enable-x11grab --enable-xlib --enable-zlib --incdir=/usr/include/ffmpeg --libdir=/usr/lib64 --mandir=/usr/share/man --optflags='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic' --prefix=/usr --shlibdir=/usr/lib64 --enable-runtime-cpudetect
+  libavutil      54. 31.100 / 54. 31.100
+  libavcodec     56. 60.100 / 56. 60.100
+  libavformat    56. 40.101 / 56. 40.101
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 40.101 /  5. 40.101
+  libavresample   2.  1.  0 /  2.  1.  0
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.101 /  1.  2.101
+  libpostproc    53.  3.100 / 53.  3.100
+Input #0, image2, from 'imgs/%d.png':
+  Duration: 00:00:35.07, start: 0.000000, bitrate: N/A
+    Stream #0:0: Video: png, rgb24(pc), 1920x1080 [SAR 2835:2835 DAR 16:9], 14.25 fps, 14.29 tbr, 14.29 tbn, 14.29 tbc
+Output #0, mp4, to 'game_of_life_cuda.mp4':
+  Metadata:
+    encoder         : Lavf56.40.101
+    Stream #0:0: Video: mpeg4 ( [0][0][0] / 0x0020), yuv420p, 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 200 kb/s, 14.29 fps, 12800 tbn, 14.29 tbc
+    Metadata:
+      encoder         : Lavc56.60.100 mpeg4
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> mpeg4 (native))
+Press [q] to stop, [?] for help
+Input stream #0:0 frame changed from size:1920x1080 fmt:rgb24 to size:1920x1080 fmt:gray
+Past duration 0.999992 too large
+    Last message repeated 42 times
+frame=   45 fps=0.0 q=31.0 size=     822kB time=00:00:03.15 bitrate=2138.5kbits/s    Past duration 0.999992 too large
+    Last message repeated 50 times
+frame=   96 fps= 95 q=31.0 size=    1002kB time=00:00:06.72 bitrate=1221.3kbits/s    Past duration 0.999992 too large
+    Last message repeated 51 times
+frame=  148 fps= 97 q=31.0 size=    1198kB time=00:00:10.36 bitrate= 947.1kbits/s    Past duration 0.999992 too large
+    Last message repeated 50 times
+frame=  199 fps= 98 q=31.0 size=    1369kB time=00:00:13.93 bitrate= 805.0kbits/s    Past duration 0.999992 too large
+    Last message repeated 51 times
+frame=  251 fps= 99 q=31.0 size=    1541kB time=00:00:17.57 bitrate= 718.5kbits/s    Past duration 0.999992 too large
+    Last message repeated 51 times
+frame=  303 fps=100 q=31.0 size=    1734kB time=00:00:21.21 bitrate= 669.9kbits/s    Past duration 0.999992 too large
+    Last message repeated 50 times
+frame=  354 fps=100 q=31.0 size=    1903kB time=00:00:24.78 bitrate= 629.2kbits/s    Past duration 0.999992 too large
+    Last message repeated 44 times
+frame=  399 fps= 98 q=31.0 size=    2063kB time=00:00:27.93 bitrate= 605.1kbits/s    Past duration 0.999992 too large
+    Last message repeated 49 times
+frame=  449 fps= 98 q=31.0 size=    2230kB time=00:00:31.43 bitrate= 581.4kbits/s    Past duration 0.999992 too large
+    Last message repeated 51 times
+frame=  501 fps= 99 q=31.0 size=    2400kB time=00:00:35.07 bitrate= 560.6kbits/s    frame=  501 fps= 99 q=31.0 Lsize=    2403kB time=00:00:35.07 bitrate= 561.3kbits/s    
+video:2400kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.124726%

@@ -4,7 +4,7 @@ IMG_LARGE=http://img15.deviantart.net/5491/i/2015/172/b/9/norwegian_wood_by_land
 IMG_SMALL=http://www.verdenslitteratur.dk/files/8014/0053/3569/Haruki_Murakami_468432a_sh_381.png
 IMG_LARGE_SPACE=http://i.imgur.com/7PfNzTO.png
 # Pick either small or large image ------------------------------------------------------------------
-IMG=$(IMG_LARGE)
+IMG=$(IMG_LARGE_SPACE)
 IMGS_FOLDER=imgs
 # Set the command for nvcc compiler -----------------------------------------------------------------
 NVCC=nvcc
@@ -42,9 +42,9 @@ device.o: device.cu utils.h
 
 create_run:
 	echo "./game_of_life_cuda && \
-	ffmpeg -r 24 -f image2 -r $(SPEED_VIDEO) -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y $(APPLICATION_NAME).mp4 && \
+	ffmpeg -r 24 -f image2 -r $(SPEED_VIDEO) -i $(IMGS_FOLDER)/%d.png -vcodec mpeg4 -y $(APPLICATION_NAME).mp4 > ffmpeg.log 2> ffmpeg.err && \
 	echo \"Success! Video '$(APPLICATION_NAME).mp4' was generated\"" > run.sh \
 	&& chmod +x run.sh
 
 clean:
-	rm -f run.sh *.o *.log $(IMGS_FOLDER)/*.png $(APPLICATION_NAME) $(APPLICATION_NAME).mp4
+	rm -f run.sh *.o *.log $(IMGS_FOLDER)/*.png $(APPLICATION_NAME) $(APPLICATION_NAME).mp4 ffmpeg.log ffmpeg.err
