@@ -17,7 +17,7 @@ $ cd GPU # or CPU
 $ make
 $ ./run.sh
 ```
-#### Dependencies:
+#### Requirements and Dependencies:
 * Linux System
 * NVIDIA GPU
 * CUDA Toolkit
